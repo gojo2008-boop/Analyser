@@ -3,30 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Showdown Replay Results</title>
+    <title>Pokémon Showdown Replay Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .player-container {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .player {
+            width: 45%;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+        .mon {
+            background: #e8e8e8;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Kill Summary</h1>
+    <h1>Replay Analysis</h1>
 
-    <h2>{{ player1 }}'s Kills</h2>
-    {% for attacker, fainted_list in kills[player1].items() %}
-        <h3>{{ attacker }} KO'd:</h3>
-        <ul>
-            {% for fainted in fainted_list %}
-                <li>{{ fainted }}</li>
+    <div class="player-container">
+        <div class="player">
+            <h2>{{ player1 }}</h2>
+            {% for mon in all_pokemon[player1] %}
+                <div class="mon">
+                    <strong>{{ mon }}</strong> <br>
+                    Direct Kills: {{ kills[player1][mon]["direct"] if mon in kills[player1] else 0 }} <br>
+                    Passive Kills: {{ kills[player1][mon]["passive"] if mon in kills[player1] else 0 }} <br>
+                    Deaths: {{ deaths[player1][mon] if mon in deaths[player1] else 0 }}
+                </div>
             {% endfor %}
-        </ul>
-    {% endfor %}
+        </div>
 
-    <h2>{{ player2 }}'s Kills</h2>
-    {% for attacker, fainted_list in kills[player2].items() %}
-        <h3>{{ attacker }} KO'd:</h3>
-        <ul>
-            {% for fainted in fainted_list %}
-                <li>{{ fainted }}</li>
+        <div class="player">
+            <h2>{{ player2 }}</h2>
+            {% for mon in all_pokemon[player2] %}
+                <div class="mon">
+                    <strong>{{ mon }}</strong> <br>
+                    Direct Kills: {{ kills[player2][mon]["direct"] if mon in kills[player2] else 0 }} <br>
+                    Passive Kills: {{ kills[player2][mon]["passive"] if mon in kills[player2] else 0 }} <br>
+                    Deaths: {{ deaths[player2][mon] if mon in deaths[player2] else 0 }}
+                </div>
             {% endfor %}
-        </ul>
-    {% endfor %}
+        </div>
+    </div>
+
+    <br>
+    <a href="/">Go Back</a>
 </body>
 </html>
+
 
