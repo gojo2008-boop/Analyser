@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Showdown Replay Analyzer</title>
+</head>
+<body>
+    <h1>Pokémon Showdown Replay Analyzer</h1>
+
+    <form method="post">
+        <label for="replay_url">Enter Pokémon Showdown replay link:</label>
+        <input type="text" id="replay_url" name="replay_url" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
